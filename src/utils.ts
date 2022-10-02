@@ -1,11 +1,9 @@
 // Functions
 
-import { Md5 } from './md5';
-
-const hashData = (data: string) => Md5.hashStr(data);
+import { hash } from './hash';
 
 export const toByteArray = (data: string) => {
-	const hashedData = hashData(data);
+	const hashedData = hash(data);
 	const bytes: number[] = [];
 
 	for (let i = 0; i < hashedData.length / 2; i++) {
@@ -17,7 +15,7 @@ export const toByteArray = (data: string) => {
 };
 
 export const toBitArray = (data: string) =>
-	toByteArray(hashData(data))
+	toByteArray(hash(data))
 		.map(intToBitString)
 		.join('')
 		.split('')
@@ -27,7 +25,7 @@ const intToBitString = (n: number) => n.toString(2);
 const intToByteString = (n: number) => ('0' + n.toString(16)).slice(-2);
 
 export const generateColor = (data: string): SquareItem['color'] => {
-	const bytes = toByteArray(hashData(data)).reverse();
+	const bytes = toByteArray(hash(data)).reverse();
 
 	return `#${bytes
 		.slice(bytes.length - 3, bytes.length)
