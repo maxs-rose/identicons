@@ -2,6 +2,7 @@
 	"name": "identicons",
 	"version": "1.0.0",
 	"description": "Ident Icons",
+	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "tsup src/index.ts --format esm --watch --clean"

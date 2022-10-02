@@ -5,11 +5,13 @@
 		<title>Title</title>
 	</head>
 	<body>
-		<button id="button">Click me</button>
+		<div id="container"></div>
 	</body>
-	<script type="module">
-		import { log } from './dist/index.mjs';
+	<script type='module' defer>
+		import { generateIconElement } from './dist/index.js';
 
-		document.getElementById('button').onclick = () => log();
+		const element = generateIconElement("something");
+
+		document.getElementById('container').appendChild(element);
 	</script>
 </html>
