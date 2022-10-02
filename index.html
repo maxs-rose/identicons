@@ -10,7 +10,7 @@
 	<script type='module' defer>
 		import { generateIconElement } from './dist/index.js';
 
-		const element = generateIconElement("something");
+		const element = generateIconElement("", { size: 5, imageSize: 128 });
 
 		document.getElementById('container').appendChild(element);
 	</script>

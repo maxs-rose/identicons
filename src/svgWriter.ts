@@ -1,8 +1,7 @@
-export const createSquareSvg = (
-	items: { x: number; y: number; color: string }[],
-	options: { size: number; imageSize: number }
-) => {
-	allBoxPositionsValid(items, options.size);
+import { GeneratorOptions, SquareItem } from './utils';
+
+export const createSquareSvg = (items: SquareItem[], options: GeneratorOptions) => {
+	allSquarePositionsValid(items, options.size);
 
 	const svg = [];
 	svg.push(
@@ -10,7 +9,7 @@ export const createSquareSvg = (
 	);
 
 	const boxSize = Math.floor(options.imageSize / (options.size + 1));
-	const positions = boxPositionCalculator(options.size, options.imageSize);
+	const positions = squarePositionCalculator(options.size, options.imageSize);
 
 	items.forEach((i) => {
 		const index = positions.project(i.x, i.y);
@@ -26,7 +25,7 @@ export const createSquareSvg = (
 	return svg.join('\n');
 };
 
-const allBoxPositionsValid = (positions: { x: number; y: number }[], size: number) => {
+const allSquarePositionsValid = (positions: { x: number; y: number }[], size: number) => {
 	let allValid = true;
 	positions.forEach((item) => {
 		if (item.x >= 0 && item.x < size && item.y >= 0 && item.y < size) return;
@@ -36,10 +35,10 @@ const allBoxPositionsValid = (positions: { x: number; y: number }[], size: numbe
 		allValid = false;
 	});
 
-	if (!allValid) throw new Error('Invalid box positions for icon found!');
+	// if (!allValid) throw new Error('Invalid box positions for icon found!');
 };
 
-const boxPositionCalculator = (size: number, imageSize: number) => {
+const squarePositionCalculator = (size: number, imageSize: number) => {
 	const boxSize = Math.floor(imageSize / (size + 1));
 	const marginWidth = Math.floor(boxSize / 2 + (imageSize % (size + 1)) / 2);
 
