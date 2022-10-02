@@ -11,6 +11,12 @@ export const createSquareSvg = (items: SquareItem[], options: GeneratorOptions) 
 	const boxSize = Math.floor(options.imageSize / (options.size + 1));
 	const positions = squarePositionCalculator(options.size, options.imageSize);
 
+	if (options.background) {
+		svg.push(
+			`<rect x="0" y="0" width="${options.imageSize}" height="${options.imageSize}" fill="${options.background}" />`
+		);
+	}
+
 	items.forEach((i) => {
 		const index = positions.project(i.x, i.y);
 		svg.push(
@@ -35,7 +41,7 @@ const allSquarePositionsValid = (positions: { x: number; y: number }[], size: nu
 		allValid = false;
 	});
 
-	// if (!allValid) throw new Error('Invalid box positions for icon found!');
+	if (!allValid) throw new Error('Invalid box positions for icon found!');
 };
 
 const squarePositionCalculator = (size: number, imageSize: number) => {

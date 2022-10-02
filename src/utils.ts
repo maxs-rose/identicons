@@ -35,9 +35,9 @@ export const generateColor = (data: string): SquareItem['color'] => {
 
 // Types
 export type Option = 'square';
-export type GeneratorOptions = { size: number; imageSize: number };
+export type GeneratorOptions = { size: number; imageSize: number; background?: `#${string}` };
 
 export type SquareItem = { x: number; y: number; color: `#${string}` };
 
 // Consts
-export const defaultGeneratorSize: Pick<GeneratorOptions, 'size' | 'imageSize'> = { size: 5, imageSize: 128 };
+export const defaultGeneratorSize: GeneratorOptions = { size: 5, imageSize: 12 };
